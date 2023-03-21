@@ -390,26 +390,46 @@ bool is_in_ascii_range(char ltr)
     }
 }
 
-void mario_wins_level(){
-    /**If you have ever played Super Mario Bros., Mario has to climb stairs so he can take the flag down
-     * the flag pole at the end of a level. You can see this here: https://www.youtube.com/watch?v=uEDoNp_lQjA
-     * you want to write code that will ask how many stairs Mario should climb to finish the level. From this 
-     * input you need to write code that will print the right pattern. 
-     * Example: if the user chooses 6 the pattern will be 
-     *          |>
-     *     ##   |
-     *    ###   |
-     *   ####   |
-     *  #####   |
-     * ######   |
-     *#######   #
-     *
-     * Extra example: user picks 2
-     *       |>
-     *  ##   |
-     * ###   #
-     * 
-     * Make sure to check the range! The stairs can only be so low and the console can only print so many lines! **/
+void mario_wins_level() 
+{
+    int stairs = get_int("How many stairs should Mario climb to finish the level? ");
 
-    get_int("How many stairs should mario climb to finish the level?");
+    // Check if the input is within the allowed range
+    if (stairs < 1 || stairs > 100) {
+        printf("Please enter a number between 1 and 100 inclusive.\n");
+        return;
+    }
+
+    // Print the stairs with the flag at the top
+    for (int i = 0; i < stairs; i++)
+    {
+        // Print spaces
+        for(int j = 0; j < stairs-i-1; j++)
+        {
+            printf(" ");
+        }
+
+        // Print stairs
+        for(int j = 0; j <= i; j++)
+        {
+            printf("#");
+        }    
+
+        // Print flagpole
+        if(i == stairs-1)
+        {
+            // Print spaces
+            for(int k = 0; k < stairs-1; k++)
+            {
+                printf(" ");
+            }
+            // Print flagpole
+            printf(" |>");
+        }
+
+        // Print newline character
+        printf("\n");   
+    }
+
+    printf("You saved the princess!\n");
 }
